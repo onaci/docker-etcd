@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 if [[ "${1:0:1}" != '-' && "x$1" != "x/bin/etcd" ]]; then
   exec $@
 fi
@@ -12,7 +12,7 @@ NODE_NAME=default
 # lock file to make sure we're not running multiple containers on the same volume
 LOCK_FILE=/data/ctr.lck
 
-ARGS="--data-dir=/data"
+ARGS="--data-dir=/data --logger=zap"
 echo "$@" | grep -q -- "-auto-compaction-retention"
 if [[ $? -ne 0 ]]; then
   echo "setting default auto compaction retention"
