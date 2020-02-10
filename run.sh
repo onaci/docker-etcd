@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -x
 if [[ "${1:0:1}" != '-' && "x$1" != "x/bin/etcd" ]]; then
   exec $@
 fi
