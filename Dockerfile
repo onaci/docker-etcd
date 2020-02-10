@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk --no-cache add bind-tools tini@community
+RUN apk --no-cache add bind-tools tini curl bash
 ARG ETCD_VERSION=3.4.3
 RUN curl -L https://github.com/coreos/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-amd64.tar.gz -o etcd.tar.gz && \
     tar xzf etcd.tar.gz && \
