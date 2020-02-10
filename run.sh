@@ -1,7 +1,10 @@
-#!/bin/bash -x
+#!/bin/bash
 if [[ "${1:0:1}" != '-' && "x$1" != "x/bin/etcd" ]]; then
   exec $@
 fi
+
+echo '{"level":"info","ts":"'$(date -Iseconds -u)'","msg": See /data/run.log for run.sh log"}'
+exec >/data/run.log
 
 echo -n "$(date +%F\ %T) I | Running "
 /bin/etcd --version
@@ -180,8 +183,9 @@ if [[ -n "$TEST" ]]; then
     exit 1
   fi
 else
+  echo "EXEC: flock -xn $LOCK_FILE /bin/etcd $ARGS"
   if [ "${ARGS:0:1}" = '-' ]; then
-    exec flock -xn $LOCK_FILE /bin/etcd $ARGS
+    exec flock -xn $LOCK_FILE /bin/etcd $ARGS  1>&2
   else
     exec $ARGS
   fi
