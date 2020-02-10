@@ -12,7 +12,7 @@ NODE_NAME=default
 # lock file to make sure we're not running multiple containers on the same volume
 LOCK_FILE=/data/ctr.lck
 
-ARGS="--data-dir=/data --logger=zap"
+ARGS="--data-dir=/data/etcd --logger=zap"
 echo "$@" | grep -q -- "-auto-compaction-retention"
 if [[ $? -ne 0 ]]; then
   echo "setting default auto compaction retention"
