@@ -3,7 +3,7 @@
 version=${1:-latest}
 API=3
 #image=quay.io/coreos/etcd:v$version
-image=appcelerator/etcd:$version
+image=onaci/etcd:$version
 
 _cleanup() {
   echo "clean up..."
